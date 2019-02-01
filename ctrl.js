@@ -50,6 +50,12 @@ function submituser() {
     for(var i=0;i<number;i++){
         var us = document.getElementById("name"+i).value;
         var em= document.getElementById("email"+i).value;
+        if (check(em))
+            alert("Checked true")
+        else {
+            alert("email is wrong ")
+            return
+        }
         jso[us] = "paid";
         jsu[us] = {
             name:us,
@@ -66,6 +72,13 @@ function submituser() {
 
 function login() {
     var email = document.getElementById("email").value;
+    if (/^\w+([\.-]?\w+)*@dhishna.org+$/.test(email))
+    {
+    }
+    else {
+        alert("email incorrect");
+        return
+    }
     var password = document.getElementById("password").value;
     firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
         var errorCode = error.code;
@@ -74,6 +87,15 @@ function login() {
 
 }
 
+function check(mail){
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))
+    {
+    }
+    else {
+        alert("You have entered an invalid email address!")
+        return (false)
+    }
+}
 function resetuser() {
     number =0;
     user = document.getElementById("userBlock");
